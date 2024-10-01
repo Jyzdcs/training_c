@@ -30,7 +30,7 @@ int	check_diago(int grid[10][10], int x, int y)
 
 	i = 0;
 	count = 1;
-	while (y < count && x < count)
+	while (y > count && x > count)
 	{
 		if ((grid[y - count][x - count] == 1) && (y > 0 && x > 0))
 			return (0);
@@ -90,7 +90,7 @@ int	ft_ten_queens_puzzle(void)
 		j = 0;
 		i++;
 	}
-	if (check_diago(grid, 0, 0), check_recurrence(grid, 0, 0))
+	if (check_diago(grid, 3, 3) && check_recurrence(grid, 3, 3))
 		printf("NO RECURRENCE !\n");
 	else
 		printf("RECURRENCE !\n");
