@@ -2,50 +2,47 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-int	check_recurrence(int grid[10][10], int x, int y)
+int	check_recurrence(int grid[10][10], int y, int x)
 {
 	int	i;
 
 	i = 0;
-	while (i != '\0')
+	while (i != 10)
 	{
-		if (grid[y][x] == grid[y][i] && i != x)
+		if (grid[y][i] == 1 && i != x)
 			return (0);
 		i++;
 	}
 	i = 0;
-	while (i != '\0')
+	while (i != 10)
 	{
-		if (grid[y][x] == grid[i][x] && i != y)
+		if (grid[i][x] == 1 && i != y)
 			return (0);
 		i++;
 	}
 	return (1);
 }
 
-int	check_diago(int grid[10][10], int x, int y)
+int	check_diago(int grid[10][10], int y, int x)
 {
+	int	diago_p;
+	int	diago_s;
 	int	i;
-	int	count;
+	int	j;
 
+	diago_p = y - x;
+	diago_s = y + x;
 	i = 0;
-	count = 1;
-	while (y > count && x > count)
+	while (i < y)
 	{
-		if ((grid[y - count][x - count] == 1) && (y > 0 && x > 0))
-			return (0);
-		else if ((grid[y - count][x + count] == 1) && (y > 0 && x > 0))
-			return (0);
-		count++;
-	}
-	count = 1;
-	while (y > count && x > count)
-	{
-		if ((grid[y + count][x + count] == 1) && (y < 9 && x < 8))
-			return (0);
-		else if ((grid[y + count][x + count] == 1) && (y < 9 && x < 8))
-			return (0);
-		count--;
+		j = 0;
+		while (j < 10)
+		{
+			if (grid[i][j] == 1 && (i - j == diago_p || i + j == diago_s))
+				return (0);
+			j++;
+		}
+		i++;
 	}
 	return (1);
 }
@@ -64,6 +61,7 @@ void	print_grid(int grid[10][10])
 		{
 			c = grid[i][j] + '0';
 			write(1, &c, 1);
+			write(1, " ", 1);
 			j++;
 		}
 		printf("\n");
@@ -90,7 +88,9 @@ int	ft_ten_queens_puzzle(void)
 		j = 0;
 		i++;
 	}
-	if (check_diago(grid, 3, 3) && check_recurrence(grid, 3, 3))
+	grid[4][5] = 1;
+	grid[1][9] = 1;
+	if (check_diago(grid, 4, 5) && check_recurrence(grid, 4, 5))
 		printf("NO RECURRENCE !\n");
 	else
 		printf("RECURRENCE !\n");
