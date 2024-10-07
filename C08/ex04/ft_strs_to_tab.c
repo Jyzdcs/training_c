@@ -52,11 +52,5 @@ int	main(int argc, char *argv[])
 {
 	struct s_stock_str	*tab;
 	tab = ft_strs_to_tab(4, &argv[1]);
-	int	i = 0;
-	while (tab[i].str != 0)
-	{
-		printf("size : %d, str : %s, copy : %s\n", tab[i].size, tab[i].str, tab[i].copy);
-		i++;
-	}
-}
-*/
+	ft_show_tab(tab);
+}*/
