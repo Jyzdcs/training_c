@@ -1,10 +1,10 @@
 #ifndef FT_POINT_H
 #define FT_POINT_H
 
-struct t_point
+typedef struct 
 {
 	int	i;
 	int	y;
-};
+} t_point;
 
 #endif
